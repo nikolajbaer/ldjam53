@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfoe8i00ocifd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6h82a"]
+albedo_color = Color(0.576471, 0.556863, 0.027451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iwlb8"]
+material = SubResource("StandardMaterial3D_6h82a")
+size = Vector3(10, 5, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_is8va"]
+size = Vector3(10, 5, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68xyj"]
+albedo_color = Color(0.27451, 0.164706, 0.0705882, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_gnei1"]
+material = SubResource("StandardMaterial3D_68xyj")
+size = Vector3(10, 3, 11)
+
+[node name="House1" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("BoxMesh_iwlb8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_is8va")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 6.12973, 0)
+mesh = SubResource("PrismMesh_gnei1")

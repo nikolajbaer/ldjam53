@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://lcbm8i7rn1f0"]
+
+[ext_resource type="PackedScene" uid="uid://dfoe8i00ocifd" path="res://house_1.tscn" id="1_ye0xp"]
+[ext_resource type="PackedScene" uid="uid://daxej1qjb2u0v" path="res://mailbox.tscn" id="2_chj1q"]
+
+[node name="Dwelling" type="Node3D" groups=["dwellings"]]
+
+[node name="House1" parent="." instance=ExtResource("1_ye0xp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+
+[node name="Mailbox" parent="." instance=ExtResource("2_chj1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5)

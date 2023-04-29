@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxaim060gbtoj"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_whr2m"]
+[ext_resource type="PackedScene" uid="uid://clilnwejnhwu7" path="res://letter_mesh.tscn" id="2_xpaev"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3rsdq"]
+size = Vector3(3, 3, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5m1op"]
+size = Vector3(3, 3, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hr25"]
+albedo_color = Color(0, 0.286275, 0.701961, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d40ak"]
+material = SubResource("StandardMaterial3D_5hr25")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scy3y"]
+albedo_color = Color(0.839216, 0.603922, 0.372549, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rs8a2"]
+material = SubResource("StandardMaterial3D_scy3y")
+radius = 0.25
+height = 0.5
+radial_segments = 16
+rings = 8
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 2
+script = ExtResource("1_whr2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_3rsdq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_5m1op")
+
+[node name="Launcher" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1.26099, 1.8067, -0.525709)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Launcher"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_d40ak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Launcher/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.670572, 0)
+mesh = SubResource("SphereMesh_rs8a2")
+
+[node name="Launch" type="Node3D" parent="Launcher"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.34465e-07, 1.5, 0)
+
+[node name="LetterMesh" parent="Launcher/Launch" instance=ExtResource("2_xpaev")]

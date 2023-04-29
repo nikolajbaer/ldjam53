@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6uknqqo5cvly"]
+
+[ext_resource type="PackedScene" uid="uid://clilnwejnhwu7" path="res://letter_mesh.tscn" id="1_28cva"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyrg3"]
+size = Vector3(0.1, 0.6, 1)
+
+[node name="Letter" type="RigidBody3D" groups=["letters"]]
+sleeping = true
+freeze = true
+
+[node name="LetterMesh" parent="." instance=ExtResource("1_28cva")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lyrg3")

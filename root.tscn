@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://o3jqp7lo78vj"]
+
+[ext_resource type="Script" path="res://root.gd" id="1_uyu8h"]
+[ext_resource type="PackedScene" uid="uid://cxaim060gbtoj" path="res://player.tscn" id="1_wjfnk"]
+[ext_resource type="PackedScene" uid="uid://lcbm8i7rn1f0" path="res://dwelling.tscn" id="2_wthvx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puro7"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0.101961, 0.0117647, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_at1yq"]
+material = SubResource("StandardMaterial3D_puro7")
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j810d"]
+albedo_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p82ca"]
+material = SubResource("StandardMaterial3D_j810d")
+size = Vector2(18, 2000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_23i76"]
+
+[node name="root" type="Node3D"]
+script = ExtResource("1_uyu8h")
+
+[node name="Player" parent="." instance=ExtResource("1_wjfnk")]
+
+[node name="Letters" type="Node3D" parent="."]
+
+[node name="Dwellings" type="Node3D" parent="."]
+
+[node name="Dwelling" parent="Dwellings" instance=ExtResource("2_wthvx")]
+visible = false
+
+[node name="WithPlayer" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="WithPlayer"]
+
+[node name="Grass" type="MeshInstance3D" parent="WithPlayer/Ground"]
+mesh = SubResource("PlaneMesh_at1yq")
+
+[node name="Road" type="MeshInstance3D" parent="WithPlayer/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("PlaneMesh_p82ca")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WithPlayer/Ground"]
+shape = SubResource("WorldBoundaryShape3D_23i76")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WithPlayer/Ground"]
+transform = Transform3D(0.917442, -0.00478438, -0.39784, 0.397869, 0.0110323, 0.917376, 0, -0.999928, 0.012025, -3.3753, 4.27915, -2.40065)
+shadow_enabled = true
+
+[node name="Camera3D2" type="Camera3D" parent="WithPlayer"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 6.12572, 7.86114)
+
+[connection signal="launched" from="Player" to="." method="_on_player_launched"]
